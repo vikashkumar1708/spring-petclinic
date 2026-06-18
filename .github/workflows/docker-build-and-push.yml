@@ -23,7 +23,6 @@ jobs:
                 context: .
                 tags: |
                   ${{secrets.DOCKERHUB_USER}}/petclinic:latest
-                  #to get latest commit
                   ${{secrets.DOCKERHUB_USER}}/petclinic:${{ github.sha }}      
 
 
