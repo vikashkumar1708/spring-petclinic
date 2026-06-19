@@ -17,7 +17,7 @@ jobs:
 # for NVD API key request api key at their website
             - name: Run OWASP Dependency Check
               run: |
-                ./mvn clean compile org.owasp:dependency-check-maven:check \
+                mvn clean compile org.owasp:dependency-check-maven:check \
                 -DnvdApiKey=${{ secrets.NVD_API_KEY }} \
                 -DfailBuildOnCVSS=7
 
