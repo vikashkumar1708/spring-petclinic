@@ -16,4 +16,4 @@ jobs:
                 cache: "maven"
 
             - name: run checkstyle
-              run: ./mvn checkstyle:check
+              run: ./mvnw checkstyle:check
