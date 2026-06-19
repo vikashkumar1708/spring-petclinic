@@ -1,3 +1,5 @@
+# code quaality check using check style (it is already configured in maven file)
+# SAST 
 name: code quality check using Checkstyle linter
 on:
     workflow_call:
@@ -17,3 +19,11 @@ jobs:
 # use ./mvnw verify as checkstyle is already configure in maven
             - name: run checkstyle
               run: ./mvnw verify
+
+# run semgrep for SAST(static application security testing) and 
+            - name: run semgrep for SAST
+              uses: semgrep/semgrep-action@v1
+              with:
+                config: >-
+                  p/java
+                  p/owasp-top-10
