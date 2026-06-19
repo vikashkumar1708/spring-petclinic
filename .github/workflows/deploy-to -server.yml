@@ -41,5 +41,6 @@ jobs:
                 script: |
                   cd ~/petclinic
                   echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
+                  docker compose down || true
                   docker compose pull
-                  docker compose down && docker compose up -d
+                  docker compose down && docker compose up -d --build --force-recreate --pull always
