@@ -1,0 +1,15 @@
+# Scanning dockerfile using Hadolint 
+name: dockerfile scan using Hadolint
+on:
+    workflow_call:
+jobs:
+    dockerfile-scan:
+        runs-on: ubuntu-latest
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v4
+
+            - name: dockerfile scanning using hadolint
+              uses: hadolint/hadolint-action@v3.1.0
+              with:
+                dockerfile: Dockerfile
