@@ -19,7 +19,7 @@ services:
       - petclinic-network
 
   petclinic:
-    image: vikashkumar1708/petclinic:latest
+    build: .
     container_name: petclinic
     ports:
       - "8081:8080"
