@@ -23,4 +23,6 @@ jobs:
     deploy:
         needs: [image-scan]
         uses: ./.github/workflows/deploy.yml
-        
+    deploy-to-server:
+        needs: [deploy]
+        uses: ./.github/workflows/deploy-to -server.yml

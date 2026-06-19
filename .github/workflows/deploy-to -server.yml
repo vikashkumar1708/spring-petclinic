@@ -1,0 +1,45 @@
+name: deploy to EC2
+on:
+    workflow_call:
+jobs:
+    deploy-to-EC2:
+        runs-on: ubuntu-latest
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v4
+
+            - name: ssh to server
+              uses: appleboy/ssh-action@v1.0.3
+              with: 
+                host: ${{ secrets.SSH_HOST }}
+                username: ${{ secrets.SSH_USERNAME }}
+                key: ${{ secrets.SSH_PRIVATE_KEY }}
+                script: |
+                  sudo apt-get update
+                  sudo apt-get install -y docker.io
+                  sudo apt-get install -y docker-compose-plugin 
+                  docker --version
+                  docker compose version
+                  sudo usermod -aG docker $USER && newgrp docker
+                  mkdir -p ~/petclinic
+
+            - name: copy docker-compose file
+              uses: appleboy/scp-action@v1
+              with:
+                host: ${{ secrets.EC2_SSH_HOST }}
+                username: ${{ secrets.EC2_SSH_USERNAME }}
+                key: ${{ secrets.EC2_SSH_PRIVATE_KEY}}
+                source: docker-compose.yml
+                target: ~/petclinic
+
+            - name: SSH to production server                 
+              uses: appleboy/ssh-action@v1.0.3
+              with: 
+                host: ${{ secrets.EC2_SSH_HOST }}
+                username: ${{ secrets.EC2_SSH_USERNAME }}
+                key: ${{ secrets.EC2_SSH_PRIVATE_KEY}}
+                script: |
+                  cd ~/petclinic
+                  echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
+                  docker compose pull
+                  docker compose down && docker compose up -d
