@@ -16,8 +16,8 @@ jobs:
                 key: ${{ secrets.EC2_SSH_PRIVATE_KEY}}
                 script: |
                   sudo apt-get update
-                  sudo apt-get install -y docker.io
-                  sudo apt-get install -y docker-compose-plugin 
+                  sudo apt install -y docker.io
+                  sudo apt install -y docker-compose-v2
                   docker --version
                   docker compose version
                   sudo usermod -aG docker $USER && newgrp docker
