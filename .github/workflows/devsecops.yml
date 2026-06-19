@@ -20,3 +20,7 @@ jobs:
         needs: [docker-build-and-push]
         uses: ./.github/workflows/image-scan.yml
         secrets: inherit
+    deploy:
+        needs: [image-scan]
+        uses: ./.github/workflows/deploy.yml
+        

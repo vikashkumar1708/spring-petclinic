@@ -1,0 +1,15 @@
+name: deploy petclinic app
+on:
+    workflow_call:
+jobs:
+    deployment:
+        runs-on: ubuntu-latest
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v4
+
+            - name: setup docker compose
+              uses: docker/setup-compose-action@v2
+
+            - name: run petclinic
+              run: docker compose up -d
