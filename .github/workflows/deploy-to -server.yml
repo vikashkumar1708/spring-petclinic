@@ -43,4 +43,4 @@ jobs:
                   echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
                   docker compose down || true
                   docker compose pull
-                  docker compose down && docker compose up -d --build --force-recreate --pull always
+                  docker compose down && docker compose up -d --force-recreate --pull always
