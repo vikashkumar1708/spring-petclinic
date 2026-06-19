@@ -14,7 +14,7 @@ jobs:
                 java-version: "21"
                 distribution: "temurin"
                 cache: "maven"
-
+# for NVD API key request api key at their website
             - name: Run OWASP Dependency Check
               run: |
                 mvn clean compile org.owasp:dependency-check-maven:check \
