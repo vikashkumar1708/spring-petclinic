@@ -23,3 +23,4 @@ jobs:
     deploy-to-server:
         needs: [image-scan]
         uses: ./.github/workflows/deploy-to -server.yml
+        secrets: inherit
