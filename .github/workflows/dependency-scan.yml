@@ -22,6 +22,7 @@ jobs:
                 mvn clean compile org.owasp:dependency-check-maven:check \
                 -DnvdApiKey=$NVD_API_KEY \
                 -DfailBuildOnCVSS=7
+                -DnvdMaxRetryCount=50
 
             - name: upload scan report
               if: always()
